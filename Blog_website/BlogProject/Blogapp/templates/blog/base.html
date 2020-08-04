@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Blog Project</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&family=Sahitya&display=swap" rel="stylesheet">
+  </head>
+  <body >
+
+      <nav class="navbar navbar-dark bg-dark" >
+        <div class="">
+          <ul class="navbar nav-brand"  >
+            <li style="font-size: 40px;color:#30ffa6;font-family:Georgia;" class="navbar nav-item"><a style="color: inherit;" href="{% url 'Blogapp:post_list' %}">My Blog</a></li>
+            <li  style="font-size:20px" class="navbar nav-item"> <a  style="color: inherit;" href="{% url 'Blogapp:about' %}"> About</a></li>
+            <li style="font-size:20px" class="navbar nav-item"> <a style="color: inherit;" href="https://www.github.com/Anna-G11">GitHub</a></li>
+            <li style="font-size:20px" class="navbar nav-item"> <a style="color: inherit;" href="https://www.linkedin.com/in/anna-gerald-b7b1a510a/">LinkedIn </a></li>
+          </ul>
+
+          <ul class='nav navbar-nav navbar-right'>
+            {% if user.is_authenticated %}
+            <li> <a href="{% url 'Blogapp:post_new' %}">New Post</a> </li>
+            <li>
+              <a href="{% url 'Blogapp:post_draft_list' %}"> Drafts</a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}"> Logout</a>
+            </li>
+            {% else%}
+            <li><a style="font-size:20px; color:inherit;" class="nav navbar-right" href="{% url 'login' %}"> Login </a> </li>
+
+            {% endif %}
+          </ul>
+
+        </div>
+        </nav>
+
+        <div class="content container">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="blog_post">
+                {% block content%}
+                {% endblock%}
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+  </body>
+</html>
